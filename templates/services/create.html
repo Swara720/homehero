@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <h2>Create Service</h2>
+
+    <form method="POST">
+        {% csrf_token %}
+        <input name="title" placeholder="Title"><br>
+        <input name="description" placeholder="Description"><br>
+        <input name="price" placeholder="Price"><br>
+        <button type="submit">Add</button>
+    </form>
+</body>
+
+</html>
