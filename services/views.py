@@ -2,6 +2,10 @@ from django.shortcuts import render, redirect
 from .models import Service
 from django.contrib.auth.decorators import login_required
 
+def home(request):
+    services = Service.objects.all()
+    return render(request, 'home.html', {'services': services})
+
 @login_required
 def create_service(request):
     if request.user.user_type != 'provider':
