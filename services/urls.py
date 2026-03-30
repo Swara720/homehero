@@ -1,7 +1,11 @@
 from django.urls import path
-from .views import create_service, service_list
+from . import views
+
+app_name = 'services'
 
 urlpatterns = [
-    path('', service_list, name='service_list'),
-    path('create/', create_service, name='create_service'),
+    path('', views.home, name='home'),
+    path('list/', views.service_list, name='service_list'),
+    path('provider/dashboard/', views.provider_dashboard, name='provider_dashboard'),
+    path('provider/create-service/', views.create_service, name='create_service'),
 ]

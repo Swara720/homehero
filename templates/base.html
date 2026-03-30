@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="csrf-token" content="{{ csrf_token }}">
+    <title>HomeHero</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"
+    />
+  </head>
+  <body class="bg-gray-50 font-sans">
+    <!-- Navbar -->
+    <nav class="bg-white shadow sticky top-0 z-50">
+      <div
+        class="max-w-7xl mx-auto px-6 py-4 flex justify-between items-center"
+      >
+        <a
+          href="{% url 'services:home' %}"
+          class="text-3xl font-bold text-blue-600"
+          >🏠 HomeHero</a
+        >
+
+        <div class="flex items-center gap-6">
+          {% if user.is_authenticated %} {% if user.is_provider %}
+          <a
+            href="{% url 'services:provider_dashboard' %}"
+            class="font-medium text-gray-700 hover:text-blue-600"
+            >Provider Panel</a
+          >
+          {% elif user.is_customer %}
+          <a
+            href="{% url 'bookings:customer_dashboard' %}"
+            class="font-medium text-gray-700 hover:text-blue-600"
+          >
+            My Bookings
+          </a>
+          {% endif %}
+          <a href="{% url 'accounts:logout' %}" class="text-red-500 font-medium"
+            >Logout</a
+          >
+          {% else %}
+          <a
+            href="{% url 'accounts:login' %}"
+            class="font-medium text-gray-700 hover:text-blue-600"
+            >Login</a
+          >
+          <a
+            href="{% url 'accounts:register' %}"
+            class="bg-blue-600 text-white px-6 py-3 rounded-2xl hover:bg-blue-700"
+            >Join Now</a
+          >
+          {% endif %}
+        </div>
+      </div>
+    </nav>
+
+    <main class="max-w-7xl mx-auto px-6 py-10">
+      {% block content %}{% endblock %}
+    </main>
+  </body>
+</html>
