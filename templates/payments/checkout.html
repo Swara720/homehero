@@ -1,0 +1,76 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="max-w-lg mx-auto bg-white rounded-3xl shadow-2xl p-12 text-center">
+    <h2 class="text-3xl font-bold mb-2">Complete Payment</h2>
+    <p class="text-gray-600 mb-8">{{ booking.service.title }}</p>
+    
+    <div class="text-6xl font-bold text-green-600 mb-12">
+        ₹{{ booking.service.price }}
+    </div>
+
+    <button onclick="payWithRazorpay()" 
+            class="w-full bg-blue-600 hover:bg-blue-700 text-white py-5 rounded-2xl text-xl font-semibold transition-all">
+        Pay Securely with Razorpay
+    </button>
+</div>
+
+<script src="https://checkout.razorpay.com/v1/checkout.js"></script>
+<script>
+function payWithRazorpay() {
+    const options = {
+        key: "{{ key_id }}",
+        amount: "{{ amount }}",
+        currency: "INR",
+        name: "HomeHero",
+        description: "{{ booking.service.title }}",
+        order_id: "{{ order_id }}",
+        handler: function (response) {
+            console.log("Payment Success:", response);
+
+            // Send to verify view
+            const formData = new URLSearchParams();
+            formData.append('razorpay_order_id', response.razorpay_order_id);
+            formData.append('razorpay_payment_id', response.razorpay_payment_id);
+            formData.append('razorpay_signature', response.razorpay_signature);
+
+            fetch("/payments/verify/", {
+                method: "POST",
+                headers: {
+                    "X-CSRFToken": "{{ csrf_token }}",
+                    "Content-Type": "application/x-www-form-urlencoded"
+                },
+                body: formData
+            })
+            .then(res => res.json())
+            .then(data => {
+                if (data.status === "success") {
+                    alert("✅ Payment Successful!");
+                    window.location.href = "{% url 'bookings:customer_dashboard' %}";
+                } else {
+                    alert("Payment verification failed. Please contact support.");
+                }
+            })
+            .catch(err => {
+                console.error(err);
+                alert("Something went wrong during verification.");
+            });
+        },
+        modal: {
+            ondismiss: function() {
+                console.log("Checkout closed by user");
+            }
+        },
+        theme: { color: "#2563eb" }
+    };
+
+    try {
+        const rzp = new Razorpay(options);
+        rzp.open();
+    } catch (e) {
+        console.error("Razorpay Error:", e);
+        alert("Failed to open Razorpay. Please check console.");
+    }
+}
+</script>
+{% endblock %}

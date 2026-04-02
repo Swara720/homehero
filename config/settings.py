@@ -11,7 +11,11 @@ https://docs.djangoproject.com/en/5.2/ref/settings/
 """
 
 from pathlib import Path
+# ====================== Razorpay Configuration ======================
+import os
+from dotenv import load_dotenv
 
+load_dotenv()
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
@@ -40,6 +44,8 @@ INSTALLED_APPS = [
     'accounts',
     'bookings',
     'services',
+    'payments',
+    'django_extensions',
 ]
 
 MIDDLEWARE = [
@@ -78,7 +84,7 @@ WSGI_APPLICATION = 'config.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql',
-        'NAME': 'home_hero_db',
+        'NAME': 'hh_db',
         'USER': 'root',
         'PASSWORD': 'root',
         'HOST': 'localhost',
@@ -134,3 +140,10 @@ AUTH_USER_MODEL = 'accounts.User'
 
 LOGIN_REDIRECT_URL = '/accounts/dashboard/'
 LOGOUT_REDIRECT_URL = '/accounts/login/'
+
+RAZORPAY_KEY_ID = os.getenv('RAZORPAY_KEY_ID')
+RAZORPAY_KEY_SECRET = os.getenv('RAZORPAY_KEY_SECRET')
+
+# Optional: Raise error in development if keys are missing
+if not RAZORPAY_KEY_ID or not RAZORPAY_KEY_SECRET:
+    print("WARNING: Razorpay keys are not set in .env file!")

@@ -1,0 +1,45 @@
+{% extends 'base.html' %} {% block content %}
+<div class="text-center py-16">
+  <h1 class="text-5xl font-bold text-gray-900 mb-4">Find Home Services</h1>
+  <p class="text-xl text-gray-600 mb-12">
+    Book trusted professionals for your home
+  </p>
+</div>
+
+<div
+  class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 max-w-7xl mx-auto px-6"
+>
+  {% for service in services %}
+  <div
+    class="bg-white rounded-3xl shadow-xl overflow-hidden hover:shadow-2xl transition-all"
+  >
+    {% if service.image %}
+    <img src="{{ service.image.url }}" class="w-full h-56 object-cover" />
+    {% else %}
+    <div class="h-56 bg-gray-200 flex items-center justify-center">
+      <i class="fas fa-tools text-6xl text-gray-400"></i>
+    </div>
+    {% endif %}
+
+    <div class="p-8">
+      <h3 class="text-2xl font-semibold mb-2">{{ service.title }}</h3>
+      <p class="text-green-600 text-3xl font-bold mb-4">₹{{ service.price }}</p>
+      <p class="text-gray-600 mb-6 line-clamp-3">
+        {{ service.description|truncatewords:20 }}
+      </p>
+
+      <a
+        href="{% url 'bookings:book_service' service.id %}"
+        class="block w-full bg-blue-600 text-white text-center py-4 rounded-2xl font-medium hover:bg-blue-700 transition"
+      >
+        Book Now
+      </a>
+    </div>
+  </div>
+  {% empty %}
+  <p class="col-span-3 text-center text-gray-500 py-20">
+    No services available yet.
+  </p>
+  {% endfor %}
+</div>
+{% endblock %}
