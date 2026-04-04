@@ -63,3 +63,16 @@ def reject_booking(request, booking_id):
         booking.save()
         messages.success(request, "Booking Rejected.")
     return redirect('services:provider_dashboard')
+
+@login_required
+def toggle_favorite(request, service_id):
+    service = get_object_or_404(Service, id=service_id)
+    favorite, created = Favorite.objects.get_or_create(user=request.user, service=service)
+    
+    if not created:
+        favorite.delete()
+        messages.info(request, "Removed from favorites.")
+    else:
+        messages.success(request, "Added to favorites!")
+    
+    return redirect('services:home')
