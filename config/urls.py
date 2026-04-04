@@ -2,9 +2,12 @@ from django.contrib import admin
 from django.urls import path, include
 from django.conf import settings
 from django.conf.urls.static import static
+from accounts.views import admin_dashboard
 
 urlpatterns = [
-    path('admin/', admin.site.urls),
+    path('admin/dashboard/', admin_dashboard, name='admin_dashboard'),
+    
+    # path('admin/', admin.site.urls),
     
     # Services & Home
     path('', include('services.urls')),
@@ -17,6 +20,7 @@ urlpatterns = [
     
     # Payments
     path('payments/', include('payments.urls')),
+
 ]
 
 if settings.DEBUG:

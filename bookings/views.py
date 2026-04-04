@@ -1,17 +1,19 @@
 from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib.auth.decorators import login_required
 from django.contrib import messages
+from django.http import JsonResponse
+
 from services.models import Service
-from .models import Booking
+from .models import Booking, Favorite
 from .forms import BookingForm
 
-# Customer Dashboard
+
 @login_required
 def customer_dashboard(request):
     bookings = Booking.objects.filter(customer=request.user).order_by('-created_at')
     return render(request, 'bookings/customer_dashboard.html', {'bookings': bookings})
 
-# Book Service Form
+
 @login_required
 def book_service(request, service_id):
     service = get_object_or_404(Service, id=service_id)
@@ -63,3 +65,16 @@ def reject_booking(request, booking_id):
         booking.save()
         messages.success(request, "Booking Rejected.")
     return redirect('services:provider_dashboard')
+
+@login_required
+def toggle_favorite(request, service_id):
+    service = get_object_or_404(Service, id=service_id)
+    
+    favorite = Favorite.objects.filter(user=request.user, service=service).first()
+    
+    if favorite:
+        favorite.delete()
+        return JsonResponse({'status': 'removed'})
+    else:
+        Favorite.objects.create(user=request.user, service=service)
+        return JsonResponse({'status': 'added'})

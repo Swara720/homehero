@@ -1,8 +1,9 @@
 from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib.auth.decorators import login_required
-from .models import Service
+from .models import Service, Review, ServiceImage
 from .forms import ServiceForm
-from bookings.models import Booking
+from bookings.models import Booking, Favorite
+from django.contrib import messages
 
 def home(request):
     services = Service.objects.filter(is_available=True)
@@ -53,3 +54,37 @@ def create_service(request):
 def service_list(request):
     services = Service.objects.filter(is_available=True)
     return render(request, 'services/list.html', {'services': services})
+
+@login_required
+def add_review(request, service_id):
+    service = get_object_or_404(Service, id=service_id)
+    
+    if request.method == 'POST':
+        rating = int(request.POST.get('rating'))
+        comment = request.POST.get('comment', '')
+        
+        Review.objects.create(
+            booking__service=service,   # Yeh thoda adjust kar sakte hain baad mein
+            user=request.user,
+            rating=rating,
+            comment=comment
+        )
+        messages.success(request, "Review submitted successfully!")
+        return redirect('services:home')
+    
+    return render(request, 'services/add_review.html', {'service': service})
+
+
+# Toggle Favorite
+@login_required
+def toggle_favorite(request, service_id):
+    service = get_object_or_404(Service, id=service_id)
+    favorite, created = Favorite.objects.get_or_create(user=request.user, service=service)
+    
+    if not created:
+        favorite.delete()
+        messages.info(request, "Removed from favorites.")
+    else:
+        messages.success(request, "Added to favorites!")
+    
+    return redirect('services:home')

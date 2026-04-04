@@ -1,6 +1,3 @@
-from django.db import models
-
-# Create your models here.
 from django.contrib.auth.models import AbstractUser
 from django.db import models
 
@@ -10,9 +7,12 @@ class User(AbstractUser):
         ('customer', 'Customer'),
     )
 
-    user_type = models.CharField(max_length=10, choices=USER_TYPE_CHOICES)
+    user_type = models.CharField(max_length=10, choices=USER_TYPE_CHOICES, default='customer')
     phone = models.CharField(max_length=15, blank=True, null=True)
 
+    def is_admin(self):
+        return self.user_type == 'admin'
+    
     def is_provider(self):
         return self.user_type == 'provider'
 
@@ -21,3 +21,17 @@ class User(AbstractUser):
 
     def __str__(self):
         return self.username
+
+
+class Profile(models.Model):
+    user = models.OneToOneField(User, on_delete=models.CASCADE, related_name='profile')
+    phone = models.CharField(max_length=15, blank=True, null=True)
+    address = models.TextField(blank=True, null=True)
+    profile_picture = models.ImageField(upload_to='profiles/', blank=True, null=True)
+
+    # Provider specific
+    experience = models.IntegerField(blank=True, null=True)
+    bio = models.TextField(blank=True, null=True)
+
+    def __str__(self):
+        return f"Profile of {self.user.username}"

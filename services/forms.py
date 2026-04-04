@@ -1,8 +1,5 @@
 from django import forms
-from .models import Service
-
-from django import forms
-from .models import Service
+from .models import Service, Review
 
 class ServiceForm(forms.ModelForm):
     class Meta:
@@ -25,4 +22,13 @@ class ServiceForm(forms.ModelForm):
             'category': forms.Select(attrs={
                 'class': 'w-full px-5 py-4 border border-gray-300 rounded-2xl focus:outline-none focus:border-blue-500'
             }),
+        }
+
+class ReviewForm(forms.ModelForm):
+    class Meta:
+        model = Review
+        fields = ['rating', 'comment']
+        widgets = {
+            'rating': forms.Select(choices=[(i, f"{i} Stars") for i in range(1,6)]),
+            'comment': forms.Textarea(attrs={'rows': 4}),
         }
