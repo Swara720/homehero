@@ -10,6 +10,9 @@ class User(AbstractUser):
     user_type = models.CharField(max_length=10, choices=USER_TYPE_CHOICES, default='customer')
     phone = models.CharField(max_length=15, blank=True, null=True)
 
+    def is_admin(self):
+        return self.user_type == 'admin'
+    
     def is_provider(self):
         return self.user_type == 'provider'
 
