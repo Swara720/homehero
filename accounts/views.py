@@ -45,6 +45,8 @@ def register(request):
                 return redirect('services:provider_dashboard')
             else:
                 return redirect('bookings:customer_dashboard')
+        else:
+            print(form.errors) 
     else:
         form = CustomUserCreationForm()
     return render(request, 'accounts/register.html', {'form': form})

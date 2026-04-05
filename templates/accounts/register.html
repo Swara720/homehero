@@ -131,7 +131,9 @@
             >
             {{ form.password2|safe }}
           </div>
-
+          {% if form.errors %}
+          <div class="text-red-400 text-sm mb-4">{{ form.errors }}</div>
+          {% endif %}
           <!-- Button -->
           <button
             type="submit"
