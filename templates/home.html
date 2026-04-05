@@ -1,302 +1,309 @@
-{% extends 'base.html' %}
-
-{% block content %}
-<div class="bg-[#0F172A] text-[#E5E7EB]">
-
+{% extends 'base.html' %} {% block content %}
+<div class="container bg-[#0F172A] text-[#E5E7EB]">
   <!-- 🔥 HERO BANNER -->
-  <section class="relative h-[90vh] flex items-center justify-center text-center">
+  <section
+    class="relative h-[90vh] flex items-center justify-center text-center"
+  >
     <div class="absolute inset-0">
-      <img src="https://images.unsplash.com/photo-1581578731548-c64695cc6952"
-           class="w-full h-full object-cover opacity-30">
+      <img
+        src="https://images.unsplash.com/photo-1581578731548-c64695cc6952"
+        class="w-full h-full object-cover opacity-30"
+      />
     </div>
     <div class="relative z-10">
-      <h1 class="text-5xl font-bold text-white">Home Services at Your Doorstep</h1>
+      <h1 class="text-5xl font-bold text-white">
+        Home Services at Your Doorstep
+      </h1>
       <p class="text-gray-300 mt-4">Book trusted professionals instantly</p>
-      <a href="#services"
-         class="mt-6 inline-block px-6 py-3 bg-indigo-500 rounded-xl hover:bg-indigo-600 transition">
-         Explore Services
+      <a
+        href="#services"
+        class="mt-6 inline-block px-6 py-3 bg-indigo-500 rounded-xl hover:bg-indigo-600 transition"
+      >
+        Explore Services
       </a>
     </div>
   </section>
 
-
   <!-- 🔥 ABOUT SECTION -->
-<section class="py-24  bg-[#0F172A] text-[#E5E7EB]">
+  <section class="max-w-7xl px-6 mx-auto py-24 bg-[#0F172A] text-[#E5E7EB]">
+    <!-- TOP GRID -->
+    <div class="mx-auto grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+      <!-- 🔥 LEFT: IMAGES -->
+      <div class="relative w-full h-[420px]">
+        <!-- 🔥 Background Image (FULL) -->
+        <img
+          src="https://images.unsplash.com/photo-1581578731548-c64695cc6952"
+          class="absolute inset-0 w-full h-full object-cover rounded-3xl shadow-xl"
+        />
 
-  <!-- TOP GRID -->
-  <div class=" mx-auto grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+        <!-- 🔥 Small Image (bottom right) -->
+        <img
+          src="https://images.unsplash.com/photo-1600585154340-be6161a56a0c"
+          class="absolute bottom-4 right-4 w-40 h-40 object-cover rounded-2xl shadow-2xl border-4 border-[#0F172A]"
+        />
 
-    <!-- 🔥 LEFT: IMAGES -->
-<div class="relative w-full h-[420px]">
-
-  <!-- 🔥 Background Image (FULL) -->
-  <img src="https://images.unsplash.com/photo-1581578731548-c64695cc6952"
-       class="absolute inset-0 w-full h-full object-cover rounded-3xl shadow-xl">
-
-  <!-- 🔥 Small Image (bottom right) -->
-  <img src="https://images.unsplash.com/photo-1600585154340-be6161a56a0c"
-       class="absolute bottom-4 right-4 w-40 h-40 object-cover rounded-2xl shadow-2xl border-4 border-[#0F172A]">
-
-  <!-- 🔥 Trusted Badge (top right) -->
-  <div class="absolute top-4 right-4 bg-gradient-to-r from-indigo-500 to-purple-500 
-              px-4 py-2 rounded-xl shadow-lg">
-    <p class="text-white text-sm font-semibold">
-      ⭐ Trusted by 1000+ users
-    </p>
-  </div>
-
-</div>
-
-    <!-- 🔥 RIGHT: CONTENT -->
-    <div class="space-y-6">
-
-      <h2 class="text-4xl font-bold text-white">About HomeHero</h2>
-
-      <p class="text-gray-300 leading-relaxed">
-        HomeHero is a modern home service platform designed to simplify everyday living 
-        by connecting customers with trusted and skilled service providers. Our goal is 
-        to make essential household services easily accessible, reliable, and affordable—
-        all from the comfort of your home.
-      </p>
-
-      <p class="text-gray-400 leading-relaxed">
-        At HomeHero, we focus on convenience and transparency. Users can browse services, 
-        compare pricing, book appointments, and manage their service history through a 
-        simple and user-friendly interface.
-      </p>
-
-      <p class="text-gray-400 leading-relaxed">
-        Whether it’s routine maintenance or urgent repairs, HomeHero ensures quick response 
-        and efficient service delivery.
-      </p>
-
-    </div>
-
-  </div>
-
-  <!-- 🔥 POINTERS -->
-  <div class="mt-20 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6  mx-auto">
-
-    <!-- 1 -->
-    <div class="group p-6 rounded-2xl bg-gradient-to-br from-indigo-500/20 to-purple-500/10 
-                hover:from-indigo-500/30 hover:to-purple-500/20 
-                transition duration-300 hover:-translate-y-2 hover:shadow-xl">
-      <h3 class="text-lg font-semibold text-white mb-2">🚀 Smart Platform</h3>
-      <p class="text-gray-300 text-sm">
-        Designed for simplicity and performance, making service booking fast and easy.
-      </p>
-    </div>
-
-    <!-- 2 -->
-    <div class="group p-6 rounded-2xl bg-gradient-to-br from-indigo-500/20 to-purple-500/10 
-                hover:from-indigo-500/30 hover:to-purple-500/20 
-                transition duration-300 hover:-translate-y-2 hover:shadow-xl">
-      <h3 class="text-lg font-semibold text-white mb-2">⚡ Fast Booking</h3>
-      <p class="text-gray-300 text-sm">
-        Book services instantly with just a few clicks.
-      </p>
-    </div>
-
-    <!-- 3 -->
-    <div class="group p-6 rounded-2xl bg-gradient-to-br from-indigo-500/20 to-purple-500/10 
-                hover:from-indigo-500/30 hover:to-purple-500/20 
-                transition duration-300 hover:-translate-y-2 hover:shadow-xl">
-      <h3 class="text-lg font-semibold text-white mb-2">👨‍🔧 Verified Experts</h3>
-      <p class="text-gray-300 text-sm">
-        Skilled professionals ensuring top-quality service.
-      </p>
-    </div>
-
-    <!-- 4 -->
-    <div class="group p-6 rounded-2xl bg-gradient-to-br from-indigo-500/20 to-purple-500/10 
-                hover:from-indigo-500/30 hover:to-purple-500/20 
-                transition duration-300 hover:-translate-y-2 hover:shadow-xl">
-      <h3 class="text-lg font-semibold text-white mb-2">💰 Transparent Pricing</h3>
-      <p class="text-gray-300 text-sm">
-        No hidden charges — clear and upfront pricing.
-      </p>
-    </div>
-
-    <!-- 5 -->
-    <div class="group p-6 rounded-2xl bg-gradient-to-br from-indigo-500/20 to-purple-500/10 
-                hover:from-indigo-500/30 hover:to-purple-500/20 
-                transition duration-300 hover:-translate-y-2 hover:shadow-xl">
-      <h3 class="text-lg font-semibold text-white mb-2">🔒 Secure & Reliable</h3>
-      <p class="text-gray-300 text-sm">
-        Safe transactions and dependable services.
-      </p>
-    </div>
-
-    <!-- 6 -->
-    <div class="group p-6 rounded-2xl bg-gradient-to-br from-indigo-500/20 to-purple-500/10 
-                hover:from-indigo-500/30 hover:to-purple-500/20 
-                transition duration-300 hover:-translate-y-2 hover:shadow-xl">
-      <h3 class="text-lg font-semibold text-white mb-2">❤️ Customer First</h3>
-      <p class="text-gray-300 text-sm">
-        We prioritize satisfaction and continuously improve.
-      </p>
-    </div>
-
-  </div>
-
-</section>
-
- <!-- 🔥 OWL SLIDER -->
-<section class="py-12">
-  <h2 class="text-3xl font-semibold text-center mb-8">Popular Services</h2>
-
-  <div class="owl-carousel  mx-auto">
-
-    {% for service in services %}
-    <div class="bg-[#1E293B] rounded-2xl overflow-hidden shadow-lg flex flex-col mx-2">
-
-      {% if service.image %}
-      <img src="{{ service.image.url }}" class="h-40 w-full object-cover">
-      {% endif %}
-
-      <div class="p-4 flex flex-col flex-1">
-        <h3 class="text-lg font-semibold">{{ service.title }}</h3>
-        <p class="text-indigo-400 font-bold">₹{{ service.price }}</p>
-
-        <p class="text-gray-400 text-sm mt-2 flex-1">
-          {{ service.description|truncatewords:10 }}
-        </p>
-
-        <a href="{% url 'bookings:book_service' service.id %}"
-           class="mt-4 text-center py-2 rounded-lg bg-indigo-500 hover:bg-indigo-600 transition">
-          Book Now
-        </a>
+        <!-- 🔥 Trusted Badge (top right) -->
+        <div
+          class="absolute top-4 right-4 bg-gradient-to-r from-indigo-500 to-purple-500 px-4 py-2 rounded-xl shadow-lg"
+        >
+          <p class="text-white text-sm font-semibold">
+            ⭐ Trusted by 1000+ users
+          </p>
+        </div>
       </div>
 
-    </div>
-    {% endfor %}
+      <!-- 🔥 RIGHT: CONTENT -->
+      <div class="space-y-6">
+        <h2 class="text-4xl font-bold text-white">About HomeHero</h2>
 
-  </div>
-</section>
+        <p class="text-gray-300 leading-relaxed">
+          HomeHero is a modern home service platform designed to simplify
+          everyday living by connecting customers with trusted and skilled
+          service providers. Our goal is to make essential household services
+          easily accessible, reliable, and affordable— all from the comfort of
+          your home.
+        </p>
+
+        <p class="text-gray-400 leading-relaxed">
+          At HomeHero, we focus on convenience and transparency. Users can
+          browse services, compare pricing, book appointments, and manage their
+          service history through a simple and user-friendly interface.
+        </p>
+
+        <p class="text-gray-400 leading-relaxed">
+          Whether it’s routine maintenance or urgent repairs, HomeHero ensures
+          quick response and efficient service delivery.
+        </p>
+      </div>
+    </div>
+
+    <!-- 🔥 POINTERS -->
+    <div
+      class="mt-20 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 mx-auto"
+    >
+      <!-- 1 -->
+      <div
+        class="group p-6 rounded-2xl bg-gradient-to-br from-indigo-500/20 to-purple-500/10 hover:from-indigo-500/30 hover:to-purple-500/20 transition duration-300 hover:-translate-y-2 hover:shadow-xl"
+      >
+        <h3 class="text-lg font-semibold text-white mb-2">🚀 Smart Platform</h3>
+        <p class="text-gray-300 text-sm">
+          Designed for simplicity and performance, making service booking fast
+          and easy.
+        </p>
+      </div>
+
+      <!-- 2 -->
+      <div
+        class="group p-6 rounded-2xl bg-gradient-to-br from-indigo-500/20 to-purple-500/10 hover:from-indigo-500/30 hover:to-purple-500/20 transition duration-300 hover:-translate-y-2 hover:shadow-xl"
+      >
+        <h3 class="text-lg font-semibold text-white mb-2">⚡ Fast Booking</h3>
+        <p class="text-gray-300 text-sm">
+          Book services instantly with just a few clicks.
+        </p>
+      </div>
+
+      <!-- 3 -->
+      <div
+        class="group p-6 rounded-2xl bg-gradient-to-br from-indigo-500/20 to-purple-500/10 hover:from-indigo-500/30 hover:to-purple-500/20 transition duration-300 hover:-translate-y-2 hover:shadow-xl"
+      >
+        <h3 class="text-lg font-semibold text-white mb-2">
+          👨‍🔧 Verified Experts
+        </h3>
+        <p class="text-gray-300 text-sm">
+          Skilled professionals ensuring top-quality service.
+        </p>
+      </div>
+
+      <!-- 4 -->
+      <div
+        class="group p-6 rounded-2xl bg-gradient-to-br from-indigo-500/20 to-purple-500/10 hover:from-indigo-500/30 hover:to-purple-500/20 transition duration-300 hover:-translate-y-2 hover:shadow-xl"
+      >
+        <h3 class="text-lg font-semibold text-white mb-2">
+          💰 Transparent Pricing
+        </h3>
+        <p class="text-gray-300 text-sm">
+          No hidden charges — clear and upfront pricing.
+        </p>
+      </div>
+
+      <!-- 5 -->
+      <div
+        class="group p-6 rounded-2xl bg-gradient-to-br from-indigo-500/20 to-purple-500/10 hover:from-indigo-500/30 hover:to-purple-500/20 transition duration-300 hover:-translate-y-2 hover:shadow-xl"
+      >
+        <h3 class="text-lg font-semibold text-white mb-2">
+          🔒 Secure & Reliable
+        </h3>
+        <p class="text-gray-300 text-sm">
+          Safe transactions and dependable services.
+        </p>
+      </div>
+
+      <!-- 6 -->
+      <div
+        class="group p-6 rounded-2xl bg-gradient-to-br from-indigo-500/20 to-purple-500/10 hover:from-indigo-500/30 hover:to-purple-500/20 transition duration-300 hover:-translate-y-2 hover:shadow-xl"
+      >
+        <h3 class="text-lg font-semibold text-white mb-2">❤️ Customer First</h3>
+        <p class="text-gray-300 text-sm">
+          We prioritize satisfaction and continuously improve.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- 🔥 OWL SLIDER -->
+  <section class="max-w-7xl mx-auto py-12 px-6">
+    <h2 class="text-3xl font-semibold text-center mb-8">Popular Services</h2>
+
+    <div class="owl-carousel mx-auto">
+      {% for service in services %}
+      <div
+        class="bg-[#1E293B] rounded-2xl overflow-hidden shadow-lg flex flex-col mx-2"
+      >
+        {% if service.image %}
+        <img src="{{ service.image.url }}" class="h-40 w-full object-cover" />
+        {% endif %}
+
+        <div class="p-4 flex flex-col flex-1">
+          <h3 class="text-lg font-semibold">{{ service.title }}</h3>
+          <p class="text-indigo-400 font-bold">₹{{ service.price }}</p>
+
+          <p class="text-gray-400 text-sm mt-2 flex-1">
+            {{ service.description|truncatewords:10 }}
+          </p>
+
+          <a
+            href="{% url 'bookings:book_service' service.id %}"
+            class="mt-4 text-center py-2 rounded-lg bg-indigo-500 hover:bg-indigo-600 transition"
+          >
+            Book Now
+          </a>
+        </div>
+      </div>
+      {% endfor %}
+    </div>
+  </section>
 
   <!-- 🔥 ALL SERVICES (2 PER ROW HORIZONTAL CARDS) -->
-<section id="services" class="py-16 px-6">
-  <h2 class="text-3xl font-semibold text-center mb-12">All Services</h2>
+  <section id="services" class="max-w-7xl mx-auto py-16 px-6">
+    <h2 class="text-3xl font-semibold text-center mb-12">All Services</h2>
 
-  <!-- 👇 GRID CHANGE -->
-  <div class="grid grid-cols-1 md:grid-cols-3 gap-8  mx-auto">
+    <!-- 👇 GRID CHANGE -->
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-8 mx-auto">
+      {% for service in services %}
+      <div
+        class="flex bg-[#1E293B] rounded-2xl overflow-hidden shadow-lg hover:shadow-xl transition"
+      >
+        <!-- Image -->
+        {% if service.image %}
+        <img src="{{ service.image.url }}" class="h-40 w-56 object-cover" />
+        {% endif %}
 
-    {% for service in services %}
-    <div class="flex bg-[#1E293B] rounded-2xl overflow-hidden shadow-lg hover:shadow-xl transition">
+        <!-- Content -->
+        <div class="p-5 flex flex-col flex-1">
+          <div class="flex justify-between items-start">
+            <h3 class="text-lg font-semibold text-white">
+              {{ service.title }}
+            </h3>
+            <span class="text-indigo-400 font-bold">
+              ₹{{ service.price }}
+            </span>
+          </div>
 
-      <!-- Image -->
-      {% if service.image %}
-      <img src="{{ service.image.url }}"
-           class="h-40 w-56 object-cover">
-      {% endif %}
+          <p class="text-gray-400 mt-2 text-sm flex-1">
+            {{ service.description|truncatewords:18 }}
+          </p>
 
-      <!-- Content -->
-      <div class="p-5 flex flex-col flex-1">
+          <!-- Buttons -->
+          <div class="mt-4 flex gap-2">
+            <a
+              href="{% url 'bookings:book_service' service.id %}"
+              class="px-4 py-2 text-sm rounded-lg bg-indigo-500 hover:bg-indigo-600 transition"
+            >
+              Book
+            </a>
 
-        <div class="flex justify-between items-start">
-          <h3 class="text-lg font-semibold text-white">
-            {{ service.title }}
-          </h3>
-          <span class="text-indigo-400 font-bold">
-            ₹{{ service.price }}
-          </span>
+            <button
+              class="px-3 py-2 text-sm rounded-lg border border-gray-600 hover:bg-gray-700 transition"
+            >
+              ❤️
+            </button>
+          </div>
         </div>
-
-        <p class="text-gray-400 mt-2 text-sm flex-1">
-          {{ service.description|truncatewords:18 }}
-        </p>
-
-        <!-- Buttons -->
-        <div class="mt-4 flex gap-2">
-          <a href="{% url 'bookings:book_service' service.id %}"
-             class="px-4 py-2 text-sm rounded-lg bg-indigo-500 hover:bg-indigo-600 transition">
-            Book
-          </a>
-
-          <button class="px-3 py-2 text-sm rounded-lg border border-gray-600 hover:bg-gray-700 transition">
-            ❤️
-          </button>
-        </div>
-
       </div>
-
+      {% endfor %}
     </div>
-    {% endfor %}
-
-  </div>
-</section>
-
+  </section>
 </div>
 
 <!-- JS -->
 <script>
-function scrollLeft() {
-  document.getElementById('slider').scrollBy({
-    left: -350,
-    behavior: 'smooth'
-  });
-}
+  function scrollLeft() {
+    document.getElementById("slider").scrollBy({
+      left: -350,
+      behavior: "smooth",
+    });
+  }
 
-function scrollRight() {
-  document.getElementById('slider').scrollBy({
-    left: 350,
-    behavior: 'smooth'
-  });
-}
+  function scrollRight() {
+    document.getElementById("slider").scrollBy({
+      left: 350,
+      behavior: "smooth",
+    });
+  }
 </script>
 
 <style>
-.no-scrollbar::-webkit-scrollbar {
-  display: none;
-}
+  .no-scrollbar::-webkit-scrollbar {
+    display: none;
+  }
 
-.owl-nav {
-  position: absolute;
-  bottom: -70px; /* slider ke niche */
-  left: 50%;
-  transform: translateX(-50%);
-  display: flex;
-  gap: 15px;
-}
+  .owl-nav {
+    position: absolute;
+    bottom: -70px; /* slider ke niche */
+    left: 50%;
+    transform: translateX(-50%);
+    display: flex;
+    gap: 15px;
+  }
 
-/* buttons remove default style */
-.owl-nav button {
-  background: none !important;
-}
+  /* buttons remove default style */
+  .owl-nav button {
+    background: none !important;
+  }
 
-/* custom arrow button */
-.arrow-btn {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  width: 45px;
-  height: 45px;
-  background: linear-gradient(to right, #6366f1, #8b5cf6);
-  color: white;
-  border-radius: 50%;
-  font-size: 18px;
-  transition: all 0.3s ease;
-  box-shadow: 0 4px 15px rgba(99,102,241,0.4);
-}
+  /* custom arrow button */
+  .arrow-btn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 45px;
+    height: 45px;
+    background: linear-gradient(to right, #6366f1, #8b5cf6);
+    color: white;
+    border-radius: 50%;
+    font-size: 18px;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 15px rgba(99, 102, 241, 0.4);
+  }
 
-/* hover effect */
-.arrow-btn:hover {
-  transform: scale(1.1);
-  box-shadow: 0 6px 20px rgba(139,92,246,0.6);
-}
+  /* hover effect */
+  .arrow-btn:hover {
+    transform: scale(1.1);
+    box-shadow: 0 6px 20px rgba(139, 92, 246, 0.6);
+  }
 
-/* glass effect default */
-#navbar {
-  backdrop-filter: blur(10px);
-  background: rgba(15, 23, 42, 0.3);
-}
+  /* glass effect default */
+  #navbar {
+    backdrop-filter: blur(10px);
+    background: rgba(15, 23, 42, 0.3);
+  }
 
-/* scroll pe strong glass */
-.nav-scrolled {
-  background: rgba(15, 23, 42, 0.8);
-  backdrop-filter: blur(20px);
-  box-shadow: 0 4px 20px rgba(0,0,0,0.3);
-}
+  /* scroll pe strong glass */
+  .nav-scrolled {
+    background: rgba(15, 23, 42, 0.8);
+    backdrop-filter: blur(20px);
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+  }
 </style>
 
 {% endblock %}
