@@ -38,3 +38,112 @@
   background-color: var(--bs-secondary);
   color: white;
 }
+
+/* Service Form Inputs */
+.service-form input,
+.service-form select,
+.service-form textarea {
+    width: 100%;
+    padding: 12px 16px;
+    border-radius: 12px;
+    background-color: #0F172A;
+    border: 1px solid #4B5563;
+    color: #E5E7EB;
+    font-size: 14px;
+    outline: none;
+    transition: all 0.3s ease;
+}
+
+/* Focus */
+.service-form input:focus,
+.service-form select:focus,
+.service-form textarea:focus {
+    border-color: #22D3EE;
+    box-shadow: 0 0 0 2px rgba(34, 211, 238, 0.3);
+}
+
+/* Placeholder */
+.service-form input::placeholder,
+.service-form textarea::placeholder {
+    color: #9CA3AF;
+}
+
+/* File Input */
+.service-form input[type="file"] {
+    padding: 10px;
+    background: #1E293B;
+    cursor: pointer;
+}
+
+/* Label */
+.service-form label {
+    color: #D1D5DB;
+    font-size: 14px;
+}
+
+/* Error */
+.service-form .errorlist {
+    color: #F87171;
+    font-size: 12px;
+    margin-top: 4px;
+    list-style: none;
+    padding: 0;
+}
+
+/* service book */
+/* Booking Form Styling */
+.booking-form p {
+  margin-bottom: 12px;
+}
+
+/* Inputs */
+.booking-form input,
+.booking-form select,
+.booking-form textarea {
+  width: 100%;
+  padding: 12px 16px;
+  border-radius: 12px;
+  background-color: #0F172A;
+  border: 1px solid #4B5563;
+  color: #E5E7EB;
+  font-size: 14px;
+  outline: none;
+  transition: all 0.3s ease;
+}
+
+/* Focus */
+.booking-form input:focus,
+.booking-form select:focus,
+.booking-form textarea:focus {
+  border-color: #22D3EE;
+  box-shadow: 0 0 0 2px rgba(34, 211, 238, 0.3);
+}
+
+/* Labels */
+.booking-form label {
+  display: block;
+  margin-bottom: 6px;
+  font-size: 14px;
+  color: #D1D5DB;
+}
+
+/* Placeholder */
+.booking-form input::placeholder,
+.booking-form textarea::placeholder {
+  color: #9CA3AF;
+}
+
+/* Errors */
+.booking-form .errorlist {
+  color: #F87171;
+  font-size: 12px;
+  list-style: none;
+  padding: 0;
+  margin-top: 4px;
+}
+
+/* Textarea fix */
+.booking-form textarea {
+  min-height: 100px;
+  resize: vertical;
+}

@@ -1,77 +1,100 @@
-{% extends 'base.html' %} {% block content %}
-<div class="max-w-7xl mx-auto px-6">
-  <h1 class="text-4xl font-bold mb-10">Customer Dashboard</h1>
+{% extends 'base.html' %} 
 
-  <!-- Quick Book Section -->
-  <div class="mb-12">
-    <h2 class="text-2xl font-semibold mb-6">Browse Services</h2>
-    <a
-      href="{% url 'services:home' %}"
-      class="inline-block bg-blue-600 text-white px-8 py-4 rounded-2xl hover:bg-blue-700"
-    >
-      Browse All Services & Book
-    </a>
-  </div>
+{% block content %}
+<div class="bg-[#0F172A] text-[#E5E7EB] min-h-screen py-10 px-6">
 
-  <!-- My Bookings -->
-  <h2 class="text-2xl font-semibold mb-6">My Bookings</h2>
-  <div class="grid gap-8">
-    {% for booking in bookings %}
-    <div
-      class="bg-white rounded-3xl shadow-xl p-8 flex flex-col md:flex-row md:items-center justify-between gap-6"
-    >
-      <div class="flex-1">
-        <h3 class="text-2xl font-semibold">{{ booking.service.title }}</h3>
-        <p class="text-gray-600 mt-1">
-          Status:
-          <span
-            class="font-medium px-4 py-1 rounded-full text-sm {% if booking.status == 'paid' %}bg-green-100 text-green-700 {% elif booking.status == 'confirmed' %}bg-blue-100 text-blue-700 {% elif booking.status == 'rejected' %}bg-red-100 text-red-700 {% else %}bg-orange-100 text-orange-700{% endif %}"
-          >
-            {{ booking.get_status_display }}
-          </span>
-        </p>
-        <p class="mt-2">Date: {{ booking.date }} | Time: {{ booking.time }}</p>
-        <p class="text-sm text-gray-500 mt-1">{{ booking.address }}</p>
-      </div>
+  <div class="mt-[64px] max-w-7xl mx-auto">
+    <!-- Heading -->
+    <h1 class="text-4xl font-bold mb-10 text-white">Customer Dashboard</h1>
 
-      <div class="flex-shrink-0">
-        {% if booking.status == 'confirmed' %}
-        <a
-          href="{% url 'payments:initiate_payment' booking.id %}"
-          class="block bg-blue-600 hover:bg-blue-700 text-white px-10 py-4 rounded-2xl font-semibold text-center"
-        >
-          Make Payment
-        </a>
-        {% elif booking.status == 'paid' %}
-        <span
-          class="block bg-green-600 text-white px-10 py-4 rounded-2xl font-semibold text-center"
-        >
-          ✓ Payment Done
-        </span>
-        {% elif booking.status == 'rejected' %}
-        <span
-          class="block bg-red-600 text-white px-10 py-4 rounded-2xl font-semibold text-center"
-        >
-          Rejected by Provider
-        </span>
-        {% else %}
-        <span
-          class="block bg-orange-500 text-white px-10 py-4 rounded-2xl font-semibold text-center"
-        >
-          Waiting for Provider
-        </span>
-        {% endif %}
-      </div>
-    </div>
-    {% empty %}
-    <p class="text-gray-500 text-center py-16">
-      No bookings yet.
-      <a href="{% url 'services:home' %}" class="text-blue-600 underline"
-        >Browse services</a
+    <!-- Quick Action -->
+    <div class="mb-12">
+      <h2 class="text-2xl font-semibold mb-4 text-gray-300">Browse Services</h2>
+
+      <a
+        href="{% url 'services:home' %}"
+        class="inline-block bg-[#6366F1] text-white px-6 py-3 rounded-xl font-medium hover:bg-indigo-500 transition shadow-lg hover:shadow-indigo-500/30"
       >
-      to book now.
-    </p>
-    {% endfor %}
+        Browse & Book Services 🚀
+      </a>
+    </div>
+
+    <!-- Bookings -->
+    <h2 class="text-2xl font-semibold mb-6 text-white">My Bookings</h2>
+
+    <div class="grid gap-6">
+      {% for booking in bookings %}
+      <div
+        class="bg-[#1E293B]/70 backdrop-blur-lg border border-gray-700 rounded-3xl p-6 flex flex-col md:flex-row md:items-center justify-between gap-6 hover:shadow-xl transition"
+      >
+        <!-- Info -->
+        <div class="flex-1">
+          <h3 class="text-xl font-semibold text-white">
+            {{ booking.service.title }}
+          </h3>
+
+          <p class="text-gray-400 mt-1">
+            Status:
+            <span
+              class="ml-2 px-3 py-1 rounded-full text-xs font-medium {% if booking.status == 'paid' %} bg-green-500/20 text-green-400 {% elif booking.status == 'confirmed' %} bg-blue-500/20 text-blue-400 {% elif booking.status == 'rejected' %} bg-red-500/20 text-red-400 {% else %} bg-orange-500/20 text-orange-400 {% endif %}"
+            >
+              {{ booking.get_status_display }}
+            </span>
+          </p>
+
+          <p class="mt-2 text-sm text-gray-300">
+            📅 {{ booking.date }} &nbsp; | &nbsp; ⏰ {{ booking.time }}
+          </p>
+
+          <p class="text-sm text-gray-400 mt-1">📍 {{ booking.address }}</p>
+        </div>
+
+        <!-- Action -->
+        <div class="flex-shrink-0 w-full md:w-auto">
+          {% if booking.status == 'confirmed' %}
+          <a
+            href="{% url 'payments:initiate_payment' booking.id %}"
+            class="block bg-[#6366F1] hover:bg-indigo-500 text-white px-6 py-3 rounded-xl font-medium text-center transition shadow-md hover:shadow-indigo-500/30"
+          >
+            Make Payment
+          </a>
+
+          {% elif booking.status == 'paid' %}
+          <span
+            class="block bg-green-600 text-white px-6 py-3 rounded-xl font-medium text-center"
+          >
+            ✓ Payment Done
+          </span>
+
+          {% elif booking.status == 'rejected' %}
+          <span
+            class="block bg-red-600 text-white px-6 py-3 rounded-xl font-medium text-center"
+          >
+            Rejected
+          </span>
+
+          {% else %}
+          <span
+            class="block bg-orange-500 text-white px-6 py-3 rounded-xl font-medium text-center"
+          >
+            Waiting
+          </span>
+          {% endif %}
+        </div>
+      </div>
+
+      {% empty %}
+      <div class="text-center py-16 text-gray-400">
+        <p class="text-lg mb-4">No bookings yet 😔</p>
+        <a
+          href="{% url 'services:home' %}"
+          class="text-[#22D3EE] hover:underline"
+        >
+          Browse services
+        </a>
+      </div>
+      {% endfor %}
+    </div>
   </div>
 </div>
 {% endblock %}

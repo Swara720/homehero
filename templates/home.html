@@ -160,7 +160,7 @@
         class="bg-[#1E293B] rounded-2xl overflow-hidden shadow-lg flex flex-col mx-2"
       >
         {% if service.image %}
-        <img src="{{ service.image.url }}" class="h-40 w-full object-cover" />
+        <img src="{{ service.image.url }}" class="h-40 w-full object-cover object-top"/>
         {% endif %}
 
         <div class="p-4 flex flex-col flex-1">
@@ -188,7 +188,7 @@
     <h2 class="text-3xl font-semibold text-center mb-12">All Services</h2>
 
     <!-- 👇 GRID CHANGE -->
-    <div class="grid grid-cols-1 md:grid-cols-3 gap-8 mx-auto">
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-8 mx-auto">
       {% for service in services %}
       <div
         class="flex bg-[#1E293B] rounded-2xl overflow-hidden shadow-lg hover:shadow-xl transition"

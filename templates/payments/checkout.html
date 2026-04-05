@@ -1,21 +1,45 @@
 {% extends 'base.html' %}
 
 {% block content %}
-<div class="max-w-lg mx-auto bg-white rounded-3xl shadow-2xl p-12 text-center">
-    <h2 class="text-3xl font-bold mb-2">Complete Payment</h2>
-    <p class="text-gray-600 mb-8">{{ booking.service.title }}</p>
-    
-    <div class="text-6xl font-bold text-green-600 mb-12">
-        ₹{{ booking.service.price }}
+<div class="bg-[#0F172A] text-[#E5E7EB] min-h-screen flex items-center justify-center px-6">
+
+    <div class="w-full max-w-md bg-[#1E293B]/70 backdrop-blur-lg border border-gray-700 rounded-3xl shadow-2xl p-8 text-center">
+
+        <!-- Heading -->
+        <h2 class="text-2xl font-bold text-white mb-2">
+            Complete Payment
+        </h2>
+
+        <p class="text-gray-400 mb-6">
+            {{ booking.service.title }}
+        </p>
+
+        <!-- Price Card -->
+        <div class="bg-[#0F172A] border border-gray-700 rounded-2xl py-6 mb-8">
+            <p class="text-sm text-gray-400 mb-2">Total Amount</p>
+            <div class="text-4xl font-bold text-[#22D3EE]">
+                ₹{{ booking.service.price }}
+            </div>
+        </div>
+
+        <!-- Pay Button -->
+        <button onclick="payWithRazorpay()" 
+            class="w-full py-3 rounded-xl bg-[#6366F1] hover:bg-indigo-500 transition-all font-semibold shadow-lg hover:shadow-indigo-500/30">
+            Pay Securely 🚀
+        </button>
+
+        <!-- Secure note -->
+        <p class="text-xs text-gray-500 mt-4">
+            🔒 100% secure payment powered by Razorpay
+        </p>
+
     </div>
 
-    <button onclick="payWithRazorpay()" 
-            class="w-full bg-blue-600 hover:bg-blue-700 text-white py-5 rounded-2xl text-xl font-semibold transition-all">
-        Pay Securely with Razorpay
-    </button>
 </div>
 
+<!-- Razorpay -->
 <script src="https://checkout.razorpay.com/v1/checkout.js"></script>
+
 <script>
 function payWithRazorpay() {
     const options = {
@@ -25,10 +49,10 @@ function payWithRazorpay() {
         name: "HomeHero",
         description: "{{ booking.service.title }}",
         order_id: "{{ order_id }}",
+
         handler: function (response) {
             console.log("Payment Success:", response);
 
-            // Send to verify view
             const formData = new URLSearchParams();
             formData.append('razorpay_order_id', response.razorpay_order_id);
             formData.append('razorpay_payment_id', response.razorpay_payment_id);
@@ -48,29 +72,32 @@ function payWithRazorpay() {
                     alert("✅ Payment Successful!");
                     window.location.href = "{% url 'bookings:customer_dashboard' %}";
                 } else {
-                    alert("Payment verification failed. Please contact support.");
+                    alert("Payment verification failed.");
                 }
             })
             .catch(err => {
                 console.error(err);
-                alert("Something went wrong during verification.");
+                alert("Something went wrong.");
             });
         },
+
         modal: {
             ondismiss: function() {
-                console.log("Checkout closed by user");
+                console.log("Checkout closed");
             }
         },
-        theme: { color: "#2563eb" }
+
+        theme: { color: "#6366F1" } // Indigo theme match
     };
 
     try {
         const rzp = new Razorpay(options);
         rzp.open();
     } catch (e) {
-        console.error("Razorpay Error:", e);
-        alert("Failed to open Razorpay. Please check console.");
+        console.error(e);
+        alert("Razorpay failed to open.");
     }
 }
 </script>
+
 {% endblock %}
