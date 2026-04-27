@@ -31,10 +31,13 @@
 .bg-primary {
   background-color: var(--bs-dark) !important;
 }
-.text-red{
-    color: var(--bs-tertiary) !important;
+
+.text-red {
+  color: var(--bs-tertiary) !important;
 }
-.home-page .card,.login-page .card {
+
+.home-page .card,
+.login-page .card {
   background-color: var(--bs-secondary);
   color: white;
 }
@@ -43,51 +46,51 @@
 .service-form input,
 .service-form select,
 .service-form textarea {
-    width: 100%;
-    padding: 12px 16px;
-    border-radius: 12px;
-    background-color: #0F172A;
-    border: 1px solid #4B5563;
-    color: #E5E7EB;
-    font-size: 14px;
-    outline: none;
-    transition: all 0.3s ease;
+  width: 100%;
+  padding: 12px 16px;
+  border-radius: 12px;
+  background-color: #0F172A;
+  border: 1px solid #4B5563;
+  color: #E5E7EB;
+  font-size: 14px;
+  outline: none;
+  transition: all 0.3s ease;
 }
 
 /* Focus */
 .service-form input:focus,
 .service-form select:focus,
 .service-form textarea:focus {
-    border-color: #22D3EE;
-    box-shadow: 0 0 0 2px rgba(34, 211, 238, 0.3);
+  border-color: #22D3EE;
+  box-shadow: 0 0 0 2px rgba(34, 211, 238, 0.3);
 }
 
 /* Placeholder */
 .service-form input::placeholder,
 .service-form textarea::placeholder {
-    color: #9CA3AF;
+  color: #9CA3AF;
 }
 
 /* File Input */
 .service-form input[type="file"] {
-    padding: 10px;
-    background: #1E293B;
-    cursor: pointer;
+  padding: 10px;
+  background: #1E293B;
+  cursor: pointer;
 }
 
 /* Label */
 .service-form label {
-    color: #D1D5DB;
-    font-size: 14px;
+  color: #D1D5DB;
+  font-size: 14px;
 }
 
 /* Error */
 .service-form .errorlist {
-    color: #F87171;
-    font-size: 12px;
-    margin-top: 4px;
-    list-style: none;
-    padding: 0;
+  color: #F87171;
+  font-size: 12px;
+  margin-top: 4px;
+  list-style: none;
+  padding: 0;
 }
 
 /* service book */
@@ -146,4 +149,44 @@
 .booking-form textarea {
   min-height: 100px;
   resize: vertical;
+}
+
+.profile-form input,
+.profile-form textarea,
+.profile-form select {
+  width: 100% !important;
+  padding: 12px 16px !important;
+  border-radius: 12px;
+  background-color: #0F172A !important;
+  border: 1px solid #374151 !important;
+  color: #E5E7EB !important;
+  font-size: 14px !important;
+  outline: none !important;
+  transition: all 0.3s ease !important;
+  margin-bottom: 14px !important;
+}
+
+/* Focus effect */
+.profile-form input:focus,
+.profile-form textarea:focus,
+.profile-form select:focus {
+  border-color: #6366F1;
+  box-shadow: 0 0 0 3px rgba(99, 102, 241, 0.25) !important;
+}
+
+/* Labels already good but enhance spacing */
+.profile-form label {
+  display: block !important;
+  margin-bottom: 6px !important;
+}
+
+/* Button hover glow */
+.profile-form button {
+  box-shadow: 0 10px 25px rgba(99, 102, 241, 0.3) !important;
+}
+
+.profile-form button:hover {
+  transform: translateY(-2px) !important;
+  box-shadow: 0 15px 30px rgba(99, 102, 241, 0.4) !important;
+  transition: all 0.3s ease !important;
 }

@@ -1,13 +1,23 @@
 from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib.auth.decorators import login_required
-from .models import Service, Review, ServiceImage
+from .models import Service, ServiceImage
 from .forms import ServiceForm
 from bookings.models import Booking, Favorite
 from django.contrib import messages
 
 def home(request):
-    services = Service.objects.filter(is_available=True)
-    return render(request, 'home.html', {'services': services})
+    services = Service.objects.all()
+
+    favorite_ids = []
+    if request.user.is_authenticated:
+        favorite_ids = Favorite.objects.filter(
+            user=request.user
+        ).values_list('service_id', flat=True)
+
+    return render(request, "home.html", {
+        "services": services,
+        "favorite_ids": favorite_ids
+    })
 
 @login_required
 def provider_dashboard(request):
@@ -54,25 +64,6 @@ def create_service(request):
 def service_list(request):
     services = Service.objects.filter(is_available=True)
     return render(request, 'services/list.html', {'services': services})
-
-@login_required
-def add_review(request, service_id):
-    service = get_object_or_404(Service, id=service_id)
-    
-    if request.method == 'POST':
-        rating = int(request.POST.get('rating'))
-        comment = request.POST.get('comment', '')
-        
-        Review.objects.create(
-            booking__service=service,   # Yeh thoda adjust kar sakte hain baad mein
-            user=request.user,
-            rating=rating,
-            comment=comment
-        )
-        messages.success(request, "Review submitted successfully!")
-        return redirect('services:home')
-    
-    return render(request, 'services/add_review.html', {'service': service})
 
 
 # Toggle Favorite

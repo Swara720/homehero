@@ -1,240 +1,224 @@
 {% load static %}
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <meta name="csrf-token" content="{{ csrf_token }}" />
-    <title>HomeHero</title>
-    <script src="https://cdn.tailwindcss.com"></script>
-    <link rel="stylesheet" href="{% static 'css/custom.css' %}">
-    <link
-      rel="stylesheet"
-      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"
-    />
-    <!-- Owl Carousel CSS -->
-    <link
-      rel="stylesheet"
-      href="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/assets/owl.carousel.min.css"
-    />
-    <link
-      rel="stylesheet"
-      href="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/assets/owl.theme.default.min.css"
-    />
 
-    <!-- jQuery (required) -->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="csrf-token" content="{{ csrf_token }}" />
+  <title>HomeHero</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="stylesheet" href="{% static 'css/custom.css' %}">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" />
+  <!-- Owl Carousel CSS -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/assets/owl.carousel.min.css" />
+  <link rel="stylesheet"
+    href="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/assets/owl.theme.default.min.css" />
 
-    <!-- Owl Carousel JS -->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/owl.carousel.min.js"></script>
-  </head>
-  <body class="bg-gray-50 font-sans">
-    <!-- Navbar -->
-    <!-- 🔥 NAVBAR -->
-    <nav id="navbar" class="fixed w-full z-50 transition-all duration-300">
-      <div
-        class="max-w-7xl mx-auto px-6 py-4 flex justify-between items-center"
-      >
-        <!-- LOGO -->
-        <a
-          href="{% url 'services:home' %}"
-          class="text-2xl font-bold text-white"
-        >
-          🏠 HomeHero
+  <!-- jQuery (required) -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+
+  <!-- Owl Carousel JS -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/owl.carousel.min.js"></script>
+</head>
+
+<body class="bg-gray-50 font-sans">
+  <!-- Navbar -->
+  <!-- 🔥 NAVBAR -->
+  <nav id="navbar" class="fixed w-full z-50 transition-all duration-300">
+    <div class="max-w-7xl mx-auto px-6 py-4 flex justify-between items-center">
+      <!-- LOGO -->
+      <a href="{% url 'services:home' %}" class="text-2xl font-bold text-white">
+        🏠 HomeHero
+      </a>
+
+      <!-- DESKTOP MENU -->
+      <!-- DESKTOP MENU -->
+      <div class="hidden md:flex items-center gap-6">
+
+        {% if user.is_authenticated %}
+
+        <!-- Profile -->
+        <a href="{% url 'accounts:profile' %}" class="text-gray-300 hover:text-white transition">
+          Profile
         </a>
 
-        <!-- DESKTOP MENU -->
-        <div class="hidden md:flex items-center gap-6">
-          {% if user.is_authenticated %} {% if user.is_provider %}
-          <a
-            href="{% url 'services:provider_dashboard' %}"
-            class="text-gray-300 hover:text-white transition"
-          >
-            Provider Panel
-          </a>
-          {% elif user.is_customer %}
-          <a
-            href="{% url 'bookings:customer_dashboard' %}"
-            class="text-gray-300 hover:text-white transition"
-          >
-            My Bookings
-          </a>
-          {% endif %}
-
-          <a
-            href="{% url 'accounts:logout' %}"
-            class="text-red-400 hover:text-red-300 transition"
-          >
-            Logout
-          </a>
-
-          {% else %}
-
-          <a
-            href="{% url 'accounts:login' %}"
-            class="text-gray-300 hover:text-white transition"
-          >
-            Login
-          </a>
-
-          <a
-            href="{% url 'accounts:register' %}"
-            class="px-5 py-2 rounded-xl bg-gradient-to-r from-indigo-500 to-purple-500 text-white hover:opacity-90 transition"
-          >
-            Join Now
-          </a>
-
-          {% endif %}
-        </div>
-
-        <!-- MOBILE MENU BUTTON -->
-        <button onclick="toggleMenu()" class="md:hidden text-white text-2xl">
-          ☰
-        </button>
-      </div>
-
-      <!-- MOBILE MENU -->
-      <div
-        id="mobileMenu"
-        class="hidden md:hidden px-6 pb-4 flex flex-col gap-4"
-      >
-        {% if user.is_authenticated %} {% if user.is_provider %}
-        <a href="{% url 'services:provider_dashboard' %}" class="text-gray-300"
-          >Provider Panel</a
-        >
+        {% if user.is_provider %}
+        <a href="{% url 'services:provider_dashboard' %}" class="text-gray-300 hover:text-white transition">
+          Provider Panel
+        </a>
         {% elif user.is_customer %}
-        <a href="{% url 'bookings:customer_dashboard' %}" class="text-gray-300"
-          >My Bookings</a
-        >
+        <a href="{% url 'bookings:customer_dashboard' %}" class="text-gray-300 hover:text-white transition">
+          My Bookings
+        </a>
         {% endif %}
 
-        <a href="{% url 'accounts:logout' %}" class="text-red-400">Logout</a>
+        <a href="{% url 'accounts:logout' %}" class="text-red-400 hover:text-red-300 transition">
+          Logout
+        </a>
 
         {% else %}
 
-        <a href="{% url 'accounts:login' %}" class="text-gray-300">Login</a>
-        <a
-          href="{% url 'accounts:register' %}"
-          class="text-white bg-indigo-500 px-4 py-2 rounded-lg text-center"
-          >Join Now</a
-        >
+        <a href="{% url 'accounts:login' %}" class="text-gray-300 hover:text-white transition">
+          Login
+        </a>
+
+        <a href="{% url 'accounts:register' %}"
+          class="px-5 py-2 rounded-xl bg-gradient-to-r from-indigo-500 to-purple-500 text-white hover:opacity-90 transition">
+          Join Now
+        </a>
 
         {% endif %}
-      </div>
-    </nav>
 
-    <main class="bg-[#0F172A] text-[#E5E7EB]">{% block content %}{% endblock %}</main>
-    <!-- 🔥 FOOTER -->
-    <footer
-      class="bg-[#0F172A] text-gray-400 pt-16 pb-8 border-t border-gray-800"
-    >
-      <div
-        class="max-w-7xl mx-auto px-6 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-10"
-      >
-        <!-- 🏠 BRAND -->
-        <div>
-          <h2 class="text-2xl font-bold text-white mb-4">🏠 HomeHero</h2>
-          <p class="text-sm leading-relaxed">
-            Simplifying everyday life by connecting you with trusted home
-            service providers. Reliable, fast, and affordable services at your
-            doorstep.
-          </p>
-        </div>
-
-        <!-- 🔗 QUICK LINKS -->
-        <div>
-          <h3 class="text-white font-semibold mb-4">Quick Links</h3>
-          <ul class="space-y-2 text-sm">
-            <li>
-              <a
-                href="{% url 'services:home' %}"
-                class="hover:text-white transition"
-                >Home</a
-              >
-            </li>
-            <li>
-              <a href="#" class="hover:text-white transition">Services</a>
-            </li>
-            <li><a href="#" class="hover:text-white transition">About</a></li>
-            <li><a href="#" class="hover:text-white transition">Contact</a></li>
-          </ul>
-        </div>
-
-        <!-- 🛠 SERVICES -->
-        <div>
-          <h3 class="text-white font-semibold mb-4">Services</h3>
-          <ul class="space-y-2 text-sm">
-            <li>Cleaning</li>
-            <li>Plumbing</li>
-            <li>Electric Work</li>
-            <li>Home Repairs</li>
-          </ul>
-        </div>
-
-        <!-- 📞 CONTACT -->
-        <div>
-          <h3 class="text-white font-semibold mb-4">Contact Us</h3>
-          <ul class="space-y-2 text-sm">
-            <li>📍 Pune, India</li>
-            <li>📞 +91 9876543210</li>
-            <li>✉️ support@homehero.com</li>
-          </ul>
-
-          <!-- Social -->
-          <div class="flex gap-4 mt-4 text-lg">
-            <a href="#" class="hover:text-white transition">🌐</a>
-            <a href="#" class="hover:text-white transition">📘</a>
-            <a href="#" class="hover:text-white transition">📸</a>
-            <a href="#" class="hover:text-white transition">🐦</a>
-          </div>
-        </div>
       </div>
 
-      <!-- 🔥 BOTTOM -->
-      <div
-        class="mt-12 border-t border-gray-800 pt-6 text-center text-sm text-gray-500"
-      >
-        © 2026 HomeHero. All rights reserved.
-      </div>
-    </footer>
-    {% block extra_js %}{% endblock %}
+      <!-- MOBILE MENU BUTTON -->
+      <button onclick="toggleMenu()" class="md:hidden text-white text-2xl">
+        ☰
+      </button>
+    </div>
 
-    <script>
-      $(document).ready(function () {
-        $(".owl-carousel").owlCarousel({
-          loop: true,
-          margin: 20,
-          nav: true,
-          dots: false, // ❌ dots hata diye
-          autoplay: true,
-          autoplayTimeout: 2500,
-          autoplayHoverPause: true,
-          navText: [
-            "<span class='arrow-btn'>←</span>",
-            "<span class='arrow-btn'>→</span>",
-          ],
-          responsive: {
-            0: { items: 1 },
-            600: { items: 2 },
-            1000: { items: 4 },
-          },
-        });
+    <!-- MOBILE MENU -->
+    <div id="mobileMenu" class="hidden md:hidden px-6 pb-4 flex flex-col gap-4">
+
+      {% if user.is_authenticated %}
+
+      <a href="{% url 'accounts:profile' %}" class="text-gray-300">
+        Profile
+      </a>
+
+      {% if user.is_provider %}
+      <a href="{% url 'services:provider_dashboard' %}" class="text-gray-300">
+        Provider Panel
+      </a>
+      {% elif user.is_customer %}
+      <a href="{% url 'bookings:customer_dashboard' %}" class="text-gray-300">
+        My Bookings
+      </a>
+      {% endif %}
+
+      <a href="{% url 'accounts:logout' %}" class="text-red-400">
+        Logout
+      </a>
+
+      {% else %}
+
+      <a href="{% url 'accounts:login' %}" class="text-gray-300">
+        Login
+      </a>
+
+      <a href="{% url 'accounts:register' %}" class="text-white bg-indigo-500 px-4 py-2 rounded-lg text-center">
+        Join Now
+      </a>
+
+      {% endif %}
+
+    </div>
+  </nav>
+
+  <main class="bg-[#0F172A] text-[#E5E7EB]">{% block content %}{% endblock %}</main>
+  <!-- 🔥 FOOTER -->
+  <footer class="bg-[#0F172A] text-gray-400 pt-16 pb-8 border-t border-gray-800">
+    <div class="max-w-7xl mx-auto px-6 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-10">
+      <!-- 🏠 BRAND -->
+      <div>
+        <h2 class="text-2xl font-bold text-white mb-4">🏠 HomeHero</h2>
+        <p class="text-sm leading-relaxed">
+          Simplifying everyday life by connecting you with trusted home
+          service providers. Reliable, fast, and affordable services at your
+          doorstep.
+        </p>
+      </div>
+
+      <!-- 🔗 QUICK LINKS -->
+      <div>
+        <h3 class="text-white font-semibold mb-4">Quick Links</h3>
+        <ul class="space-y-2 text-sm">
+          <li>
+            <a href="{% url 'services:home' %}" class="hover:text-white transition">Home</a>
+          </li>
+          <li>
+            <a href="#" class="hover:text-white transition">Services</a>
+          </li>
+          <li><a href="#" class="hover:text-white transition">About</a></li>
+          <li><a href="#" class="hover:text-white transition">Contact</a></li>
+        </ul>
+      </div>
+
+      <!-- 🛠 SERVICES -->
+      <div>
+        <h3 class="text-white font-semibold mb-4">Services</h3>
+        <ul class="space-y-2 text-sm">
+          <li>Cleaning</li>
+          <li>Plumbing</li>
+          <li>Electric Work</li>
+          <li>Home Repairs</li>
+        </ul>
+      </div>
+
+      <!-- 📞 CONTACT -->
+      <div>
+        <h3 class="text-white font-semibold mb-4">Contact Us</h3>
+        <ul class="space-y-2 text-sm">
+          <li>📍 Pune, India</li>
+          <li>📞 +91 8080128932</li>
+          <li>✉️ support@homehero.com</li>
+        </ul>
+
+        <!-- Social -->
+        <div class="flex gap-4 mt-4 text-lg">
+          <a href="#" class="hover:text-white transition">🌐</a>
+          <a href="#" class="hover:text-white transition">📘</a>
+          <a href="#" class="hover:text-white transition">📸</a>
+          <a href="#" class="hover:text-white transition">🐦</a>
+        </div>
+      </div>
+    </div>
+
+    <!-- 🔥 BOTTOM -->
+    <div class="mt-12 border-t border-gray-800 pt-6 text-center text-sm text-gray-500">
+      © 2026 HomeHero. All rights reserved.
+    </div>
+  </footer>
+  {% block extra_js %}{% endblock %}
+
+  <script>
+    $(document).ready(function () {
+      $(".owl-carousel").owlCarousel({
+        loop: true,
+        margin: 20,
+        nav: true,
+        dots: false, // 
+        autoplay: true,
+        autoplayTimeout: 2500,
+        autoplayHoverPause: true,
+        navText: [
+          "<span class='arrow-btn'>←</span>",
+          "<span class='arrow-btn'>→</span>",
+        ],
+        responsive: {
+          0: { items: 1 },
+          600: { items: 2 },
+          1000: { items: 4 },
+        },
       });
+    });
 
-      // scroll effect
-      window.addEventListener("scroll", function () {
-        const nav = document.getElementById("navbar");
-        if (window.scrollY > 50) {
-          nav.classList.add("nav-scrolled");
-        } else {
-          nav.classList.remove("nav-scrolled");
-        }
-      });
-
-      // mobile toggle
-      function toggleMenu() {
-        document.getElementById("mobileMenu").classList.toggle("hidden");
+    // scroll effect
+    window.addEventListener("scroll", function () {
+      const nav = document.getElementById("navbar");
+      if (window.scrollY > 50) {
+        nav.classList.add("nav-scrolled");
+      } else {
+        nav.classList.remove("nav-scrolled");
       }
-    </script>
-  </body>
+    });
+
+    // mobile toggle
+    function toggleMenu() {
+      document.getElementById("mobileMenu").classList.toggle("hidden");
+    }
+  </script>
+</body>
+
 </html>

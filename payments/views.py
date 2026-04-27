@@ -1,12 +1,13 @@
 import razorpay
 from django.conf import settings
-from django.shortcuts import render, get_object_or_404
+from django.shortcuts import render,redirect, get_object_or_404
 from django.http import JsonResponse
 from django.views.decorators.csrf import csrf_exempt
 from django.contrib.auth.decorators import login_required
 from django.utils import timezone
 from bookings.models import Booking
 from .models import Payment
+from django.contrib import messages
 
 client = razorpay.Client(auth=(settings.RAZORPAY_KEY_ID, settings.RAZORPAY_KEY_SECRET))
 
@@ -33,7 +34,6 @@ def initiate_payment(request, booking_id):
         amount=booking.service.price,
         status='pending'
     )
-
     return render(request, 'payments/checkout.html', {
         'key_id': settings.RAZORPAY_KEY_ID,
         'order_id': order['id'],

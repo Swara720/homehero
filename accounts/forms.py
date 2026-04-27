@@ -1,6 +1,7 @@
 from django import forms
 from django.contrib.auth.forms import UserCreationForm
 from .models import User
+from .models import CustomerProfile, ProviderProfile
 
 class CustomUserCreationForm(UserCreationForm):
     phone = forms.CharField(max_length=15, required=False)
@@ -21,3 +22,14 @@ class CustomUserCreationForm(UserCreationForm):
             user.save()
 
         return user
+    
+class CustomerProfileForm(forms.ModelForm):
+    class Meta:
+        model = CustomerProfile
+        fields = ['first_name', 'last_name', 'phone', 'address', 'bio']
+
+
+class ProviderProfileForm(forms.ModelForm):
+    class Meta:
+        model = ProviderProfile
+        fields = ['first_name', 'last_name', 'phone', 'address', 'bio']

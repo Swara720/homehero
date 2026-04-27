@@ -1,0 +1,107 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="min-h-screen bg-[#0F172A] px-4 flex items-center justify-center py-10">
+
+  <div class="w-full max-w-2xl bg-[#1E293B] rounded-2xl shadow-xl p-8 text-white">
+
+    <!-- TITLE -->
+    <h2 class="text-3xl font-bold mb-6 text-center">
+      My Profile
+    </h2>
+
+    <!-- PROFILE CARD -->
+    <div class="space-y-3 text-gray-300">
+      <p><span class="text-white font-semibold">Name:</span>
+        {{ profile.first_name }} {{ profile.last_name }}
+      </p>
+
+      <p><span class="text-white font-semibold">Phone:</span> {{ profile.phone }}</p>
+      <p><span class="text-white font-semibold">Address:</span> {{ profile.address }}</p>
+      <p><span class="text-white font-semibold">Bio:</span> {{ profile.bio }}</p>
+    </div>
+
+    <!-- PROGRESS BAR -->
+    <div class="mt-6">
+      <div class="flex justify-between mb-2">
+        <span class="text-gray-300 text-sm font-medium">Profile Completion</span>
+        <span class="text-sm text-indigo-400 font-semibold">{{ completion }}%</span>
+      </div>
+
+      <div class="w-full bg-gray-700 rounded-full h-3 overflow-hidden">
+        <div class="h-3 rounded-full transition-all duration-500"
+          style="width: {{ completion }}%; background: linear-gradient(90deg,#6366F1,#22D3EE);">
+        </div>
+      </div>
+
+      {% if completion < 100 %}
+      <p class="text-xs text-gray-400 mt-2">
+        Complete your profile to unlock full features 🚀
+      </p>
+      {% else %}
+      <p class="text-xs text-green-400 mt-2">
+        Profile completed 🎉
+      </p>
+      {% endif %}
+    </div>
+
+    <!-- EDIT BUTTON -->
+    <button onclick="toggleForm()"
+      class="mt-6 bg-indigo-600 hover:bg-indigo-500 px-6 py-2 rounded-xl text-white font-semibold w-full">
+      Edit Profile
+    </button>
+
+  </div>
+</div>
+
+<!-- MODAL -->
+<div id="editForm" class="hidden fixed inset-0 bg-black/60 flex items-center justify-center px-4 z-50">
+
+  <div class="w-full max-w-xl bg-[#1E293B] rounded-2xl p-6 text-white">
+
+    <h2 class="text-xl font-bold mb-4">Edit Profile</h2>
+
+    <form method="POST" class="space-y-3">
+      {% csrf_token %}
+
+      <input name="first_name" value="{{ profile.first_name }}"
+        class="w-full p-3 rounded bg-[#0F172A] border border-gray-600">
+
+      <input name="last_name" value="{{ profile.last_name }}"
+        class="w-full p-3 rounded bg-[#0F172A] border border-gray-600">
+
+      <input name="phone" value="{{ profile.phone }}"
+        class="w-full p-3 rounded bg-[#0F172A] border border-gray-600">
+
+      <textarea name="address"
+        class="w-full p-3 rounded bg-[#0F172A] border border-gray-600">{{ profile.address }}</textarea>
+
+      <textarea name="bio"
+        class="w-full p-3 rounded bg-[#0F172A] border border-gray-600">{{ profile.bio }}</textarea>
+
+      <div class="flex gap-3 mt-4">
+
+        <button type="submit"
+          class="bg-green-600 hover:bg-green-500 px-6 py-2 rounded-xl flex-1">
+          Save
+        </button>
+
+        <button type="button" onclick="toggleForm()"
+          class="bg-red-600 hover:bg-red-500 px-6 py-2 rounded-xl flex-1">
+          Cancel
+        </button>
+
+      </div>
+
+    </form>
+
+  </div>
+</div>
+
+<script>
+  function toggleForm() {
+    document.getElementById("editForm").classList.toggle("hidden");
+  }
+</script>
+
+{% endblock %}

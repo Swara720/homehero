@@ -48,3 +48,15 @@ class Favorite(models.Model):
 
     def __str__(self):
         return f"{self.user.username} favorited {self.service.title}"
+    
+class Review(models.Model):
+    booking = models.OneToOneField('Booking', on_delete=models.CASCADE)
+
+    user = models.ForeignKey(
+        settings.AUTH_USER_MODEL,
+        on_delete=models.CASCADE
+    )
+
+    rating = models.IntegerField()
+    comment = models.TextField()
+    created_at = models.DateTimeField(auto_now_add=True)

@@ -6,11 +6,22 @@ from django.http import JsonResponse
 from services.models import Service
 from .models import Booking, Favorite
 from .forms import BookingForm
-
+from django.db import models
+from django.contrib.auth.models import User
+from bookings.models import Booking
+from payments.models import Payment
+from .models import Review
 
 @login_required
 def customer_dashboard(request):
     bookings = Booking.objects.filter(customer=request.user).order_by('-created_at')
+
+    for booking in bookings:
+        payment = Payment.objects.filter(booking_id=booking.id, status="paid").first()
+
+        booking.is_paid = payment is not None
+        booking.is_reviewed = Review.objects.filter(booking=booking).exists()
+
     return render(request, 'bookings/customer_dashboard.html', {'bookings': bookings})
 
 
@@ -69,12 +80,36 @@ def reject_booking(request, booking_id):
 @login_required
 def toggle_favorite(request, service_id):
     service = get_object_or_404(Service, id=service_id)
-    
-    favorite = Favorite.objects.filter(user=request.user, service=service).first()
-    
-    if favorite:
-        favorite.delete()
-        return JsonResponse({'status': 'removed'})
+
+    fav = Favorite.objects.filter(user=request.user, service=service).first()
+
+    if fav:
+        fav.delete()
+        return JsonResponse({"status": "removed"})
     else:
         Favorite.objects.create(user=request.user, service=service)
-        return JsonResponse({'status': 'added'})
+        return JsonResponse({"status": "added"})
+
+@login_required
+def submit_review(request, booking_id):
+    booking = get_object_or_404(Booking, id=booking_id, customer=request.user)
+
+    # allow only if payment done
+    payment = Payment.objects.filter(booking=booking, status="paid").first()
+    if not payment:
+        return redirect('bookings:customer_dashboard')
+
+    # prevent duplicate
+    if Review.objects.filter(booking=booking).exists():
+        return redirect('bookings:customer_dashboard')
+
+    if request.method == "POST":
+        Review.objects.create(
+            booking=booking,
+            user=request.user,
+            rating=request.POST.get("rating"),
+            comment=request.POST.get("comment")
+        )
+        return redirect('bookings:customer_dashboard')
+
+    return render(request, "bookings/review_form.html", {"booking": booking})
